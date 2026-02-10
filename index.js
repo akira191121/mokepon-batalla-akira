@@ -100,7 +100,7 @@ app.get("/mokepon/:jugadorId/ataques", (req, res) => {
     ataques: jugador.ataques || []
   })
 })
-
-app.listen(8080, () => {
-  console.log("Servidor funcionando")
+const PORT = process.env.PORT || 8080
+app.listen(PORT, () => {
+  console.log("Servidor funcionando en puerto " + PORT)
 })

@@ -1,3 +1,4 @@
+const API = window.location.origin
 const sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
 const sectionReiniciar = document.getElementById('reiniciar')
 const botonMascotaJugador = document.getElementById('boton-mascota')
@@ -155,7 +156,7 @@ function iniciarJuego() {
 }
 
 function unirseAlJuego() {
-    fetch("http://192.168.10.116:8080/unirse")
+    fetch(`${API}/unirse`)
     .then((res) => {
         if (res.ok) {
             res.text()
@@ -193,7 +194,7 @@ function seleccionarMascotaJugador() {
 
 
 function seleccionarMokepon(mascotaJugador) {
-    fetch(`http://192.168.10.116:8080/mokepon/${jugadorId}`, {
+    fetch(`${API}/mokepon/${jugadorId}`, {
         method: "post",
         headers: {
             "Content-Type": "application/json"
@@ -259,7 +260,7 @@ function secuenciaAtaque() {
 function enviarAtaques() {
     console.log('Enviar ataques', ataqueJugador);
 
-    fetch(`http://192.168.10.116:8080/mokepon/${jugadorId}/ataques`, {
+    fetch(`${API}/mokepon/${jugadorId}/ataques`, {
         method: "post",
         headers: {
             "Content-Type": "application/json"
@@ -275,7 +276,7 @@ function enviarAtaques() {
 function obtenerAtaques() {
     console.log('OBTENER ATAQUES');
     
-    fetch(`http://192.168.10.116:8080/mokepon/${enemigoId}/ataques`)
+    fetch(`${API}/mokepon/${enemigoId}/ataques`)
         .then(function (res) {
             if (res.ok) {
                 res.json()
@@ -420,7 +421,7 @@ function pintarCanvas() {
 }
 
 function enviarPosicion(x, y) {
-    fetch(`http://192.168.10.116:8080/mokepon/${jugadorId}/posicion`, {
+    fetch(`${API}/mokepon/${jugadorId}/posicion`, {
         method: "post",
         headers: {
             "Content-Type": "application/json"
@@ -551,5 +552,6 @@ function revisarColision(enemigo) {
     sectionVerMapa.style.display = 'none'
     seleccionarMascotaEnemigo(enemigo)
 }
+
 
 window.addEventListener('load', iniciarJuego)
